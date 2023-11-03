@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\URL;
 use App\Services\URLGenerator;
-use Illuminate\Support\Str;
 use App\Http\Requests\StoreURLRequest;
 
 class URLController extends Controller
@@ -20,7 +19,7 @@ class URLController extends Controller
     {
         $destination_url =  $request->input('destination_url');
 
-        $shortUrl = $this->generate($destination_url);
+        $shortUrl = URLGenerator::generate($destination_url);
 
         // Save the short URL to the database
         URL::create([
@@ -36,17 +35,5 @@ class URLController extends Controller
         
         // Redirect to the destinationURL
         return redirect($url->destination);
-    }
-
-    public  function  generate($destination_url){
-
-        do {
-
-            $randomString = Str::random(5);
-
-
-        } while (URL::where('slug', $randomString)->exists());
-
-        return $randomString;
     }
 }
