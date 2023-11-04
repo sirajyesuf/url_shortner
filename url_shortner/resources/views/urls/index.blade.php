@@ -51,7 +51,7 @@
                     </a>
                 </td>
                 <td class="px-6 py-4 whitespace-no-wrap">
-                {{$url->view}}
+                {{$url->views}}
                 </td>
             </tr>
         @endforeach
